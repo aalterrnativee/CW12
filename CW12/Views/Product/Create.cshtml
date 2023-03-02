@@ -1,0 +1,38 @@
+﻿@model ProductViewModel
+
+<form method="post" asp-controller="Product" asp-action="Create">
+    <div class="mb-3">
+        <label asp-for="@Model.Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.Color"></label>
+        <input asp-for="Color" class="form-control" />
+        <span asp-validation-for="Color"></span>
+    </div>
+    <div>
+        <label asp-for="@Model.Model"></label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model"></span>
+    </div>
+    <div>
+        @Html.LabelFor(m=>m.Code)
+        @*<label asp-for="@Model.Code"></label>*@
+        <input asp-for="Code" class="form-control" type="number" />
+        <span asp-validation-for="Code" style="color: red"></span>
+    </div>
+    <div class="mb-3">
+        Brand
+        @*@{
+        var brandList = Enum.GetValues(typeof(Brand)).OfType<Brand>()
+        .Select(m => new SelectListItem() { Text = m.ToString(), Value = Convert.ToInt32(m).ToString() }).ToList();
+        }*@
+        <select asp-for="Brand" class="form-control" asp-items="Html.GetEnumSelectList<Brand>()">
+            <option disabled selected>
+                دسته بندی برند را انتخاب کنید
+            </option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">ثبت</button>
+</form>
